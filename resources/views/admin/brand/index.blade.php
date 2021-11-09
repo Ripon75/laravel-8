@@ -4,7 +4,7 @@
           <div class="container">
             All Category
 
-            <a href="" style="float: right" class="btn btn-success btn-sm">Create Category</a>
+            <a href="{{route('brands.create')}}" style="float: right" class="btn btn-success btn-sm">Create Category</a>
             
           </div>
         </h2>
@@ -21,7 +21,6 @@
        </div>
      </div>
     @endif
-    
     
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -40,12 +39,13 @@
                               </tr>
                             </thead>
                             <tbody>
-                              {{-- @php( $i = 1 ) --}}
                               @foreach ($brands as $brand)
                               <tr>
                                 <td>{{$brands->firstItem() + $loop->index}}</td>
                                 <td>{{$brand->brand_name}}</td>
-                                {{-- <td>{{$category->user->name}}</td> --}}
+                                <td>
+                                  <img src="images/brandImages/{{$brand->brand_image}}" alt="Brand image" style="width: 70px; height:40px">
+                                </td>
                                 <td>
                                   @if($brand->created_at == NULL)
                                   <span class="text-danger">Date note set</span>
@@ -54,10 +54,11 @@
                                   @endif
                                 </td>
                                 <td>
-                                  <form action="{{route('brands.update',$brands->id)}}" method="post">
+                                  <form action="{{route('brands.destroy', $brand->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{route('brands.edit', $brands->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-warning btn-sm">Show</a>
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                   </form>
                                 </td>

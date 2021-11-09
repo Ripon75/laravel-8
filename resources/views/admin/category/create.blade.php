@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-8 offset-2">
         <div class="card mt-3">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4>Create Category</h4>
