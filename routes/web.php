@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\UserEventController;
 use App\Models\User;
 
 
@@ -15,6 +17,12 @@ Route::resource('categories', CategoryController::class);
 
 //brand route
 Route::resource('brands', BrandController::class);
+
+//Multiple image route
+Route::resource('multiImage', ImageController::class);
+
+//event route
+Route::get('event', [UserEventController::class, 'index']);
 
 
 

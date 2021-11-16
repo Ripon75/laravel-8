@@ -2,9 +2,9 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
           <div class="container">
-            All Category
+            All Brand
 
-            <a href="{{route('brands.create')}}" style="float: right" class="btn btn-success btn-sm">Create Category</a>
+            <a href="{{route('brands.create')}}" style="float: right" class="btn btn-success btn-sm">Create Brand</a>
             
           </div>
         </h2>
