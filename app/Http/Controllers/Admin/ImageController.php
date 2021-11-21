@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\MultiImage;
 use Illuminate\Http\Request;
-
+use Intervention\Image\Facades\Image;
 class ImageController extends Controller
 {
     /**
@@ -39,7 +39,19 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $multiImage = new MultiImage;
+        $image = $request->file('image');
+        if($image)
+        {
+            $uniqu_id = hexdec(uniqid());
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_name = $uniqu_id.'.'.$ext;
+            // $upload_path = 'images/multiImage/';
+            Image::make($image)->resize(300,200)->save('images/multiImage/'.$image_name);
+            $multiImage->image = $image_name;
+
+        }
+       
     }
 
     /**
