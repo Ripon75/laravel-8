@@ -15,7 +15,7 @@
                     <div class="form-group">
                         {{-- multiple="" take multiple image --}}
                         <label for="image">Select Image</label>
-                        <input type="file" class="form-control" name="image" id="image" multiple="">
+                        <input type="file" class="form-control" name="image[]" id="image" multiple="">
                     </div>
 
                     <div class="mt-3">

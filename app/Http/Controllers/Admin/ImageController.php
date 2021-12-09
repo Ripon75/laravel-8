@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MultiImage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+
 class ImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.z
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,69 +32,42 @@ class ImageController extends Controller
         return view('admin.multiImage.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $multiImage = new MultiImage;
-        $image = $request->file('image');
-        if($image)
-        {
-            $uniqu_id = hexdec(uniqid());
-            $ext = strtolower($image->getClientOriginalExtension());
-            $image_name = $uniqu_id.'.'.$ext;
-            // $upload_path = 'images/multiImage/';
-            Image::make($image)->resize(300,200)->save('images/multiImage/'.$image_name);
-            $multiImage->image = $image_name;
-
+        $files = $request->hasfile('image');
+        if($files) {
+            $images = $request->file('image');
+            foreach($images as $image) {
+            $extension         = strtolower($image->getClientOriginalExtension());
+            $unique_id         = hexdec(uniqid());
+            $image_name        = $unique_id.'.'.$extension;
+            $image_upload_path = 'images/multiImage/';
+            $image->move($image_upload_path, $image_name);
+            MultiImage::insert([
+                'image'      => $image_name,
+                'created_at' => Carbon::now()
+            ]);
+         }
         }
-       
+        return redirect()->route('multiImage.index')->with('message', 'Image Added Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

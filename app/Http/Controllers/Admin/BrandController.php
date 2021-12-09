@@ -58,7 +58,6 @@ class BrandController extends Controller
             $image_name        = $unique_id.'.'.$extension;
             $image_upload_path = 'images/brandImages/';
             $image->move($image_upload_path, $image_name);
-
             $brand->brand_image = $image_name;
         }
 

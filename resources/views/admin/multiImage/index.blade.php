@@ -4,7 +4,7 @@
           <div class="container">
             All Image
 
-            <a href="{{route('multiImage.create')}}" style="float: right" class="btn btn-success btn-sm">Create Image</a>
+            <a href="{{route('multiImage.create')}}" style="float: right" class="btn btn-success btn-sm">Add Image</a>
             
           </div>
         </h2>
@@ -29,19 +29,28 @@
                 <div class="container">
                     <div class="row">
                         <table class="table">
-                            <thead>
+                            {{-- <thead>
                               <tr>
                                 <th scope="col">SL No</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Created at</th>
                                 <th scope="col">Action</th>
                               </tr>
-                            </thead>
+                            </thead> --}}
                             <tbody>
-                             
+                              <div class="card-group">
+                                <div class="row">
+                                  @foreach ($images as $image)
+                                <div class="col-md-2 mt-5">
+                                  <div class="card">
+                                    <img src="images/multiImage/{{$image->image}}" alt="image">
+                                  </div>
+                                </div>
+                              @endforeach
+                                </div>
+                              </div>
                             </tbody>
                           </table>
-                          {{-- {{$brands->links()}} --}}
                     </div>
                 </div>
             </div>
