@@ -28,9 +28,8 @@ Route::get('event', [UserEventController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
-    $users = User::all();
-
-    return view('dashboard', [
-        'users' => $users
-    ]);
+    // $users = User::all();
+    return view('admin.index');
 })->name('dashboard');
+
+Route::get('user/logout', [BrandController::class, 'logout'])->name('user.logout');

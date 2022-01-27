@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 class BrandController extends Controller
 {
@@ -30,7 +31,6 @@ class BrandController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'brand_name' => 'required|min:3|max:100|unique:brands'
         ]);
@@ -110,6 +110,14 @@ class BrandController extends Controller
         $brand->delete();
 
         return redirect()->back()->with('message', 'Brand Deleted Successsfully');
+    }
+
+    // logout mathod
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login')->with('message', 'User Logout');
     }
 
 }
